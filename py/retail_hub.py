@@ -5,8 +5,8 @@ Created on Fri Dec  1 16:31:29 2017
 @author: daniel.roberts
 """
 
-import jw_search as jw
-import hm_search as hm
+#import jw_search as jw
+#import hm_search as hm
 import sys, json
 
 def read_in():
