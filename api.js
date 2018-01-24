@@ -27,17 +27,18 @@ router.get('/', (request, response) => {
   var parameters = urlParts.query;
   var searchquery = parameters.query;
 
-  var options = {
-    mode: 'text',
-    pythonPath: 'C:/Users/daniel.roberts/AppData/Local/Continuum/anaconda3/python36.zip',
-    pythonOptions: ['-u'],
-    scriptPath: 'py',
-    args: ['value1', 'value2', 'value3']
-};
+/*
+PythonShell.run(retailscraper, options, function (err, results) {
+  if (err) throw err;
+  // results is an array consisting of messages collected during execution
+  console.log('results: %j', results);
+});
+});
+*/
 
-  pyshell.send(JSON.stringify(searchquery));
+pyshell.send(searchquery);
 
-  pyshell.on('Activating python scrapers...', options, function (message) {
+  pyshell.on('retail_hub.py', function (message) {
 
     console.log(message);
 
@@ -48,13 +49,13 @@ router.get('/', (request, response) => {
         throw err;
     };
 
-    console.log('Done');
+    console.log(searchquery);
 
 });
 });
 
 //Start port listen
-app.listen(8080, () => console.log('Listening on port 8080'));
+app.listen(port, () => console.log('Listening on port 8080'));
 
 // CORS
 // this array is used for identification of allowed origins in CORS
