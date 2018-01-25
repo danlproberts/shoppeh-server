@@ -11,8 +11,11 @@ var PythonShell = require('python-shell');
 
 //Setting up main python script
 var retailscraper = 'py/retail_hub.py'
-var pyshell = new PythonShell(retailscraper);
+var pyshell = new PythonShell(retailscraper, { mode: 'json ', pythonPath : 'C:/Users/daniel.roberts/AppData/Local/Continuum/anaconda3/python.exe'});
 
+var uint8arrayToString = function(data){
+    return String.fromCharCode.apply(null, data);
+};
 
 //Top-level Path
 app.get('/', (request, response) => response.send('Welcome to the Shoppeh API'));
@@ -36,20 +39,21 @@ PythonShell.run(retailscraper, options, function (err, results) {
 });
 */
 
-pyshell.send(searchquery);
+ pyshell.stdout.on('result', function (result) {
 
-  pyshell.on('retail_hub.py', function (message) {
-
-    console.log(message);
+    console.log(uint8arrayToString(result));
+    //response.json();
 
   });
+
+pyshell.send(JSON.stringify(searchquery));
 
   pyshell.end(function (err) {
     if (err){
         throw err;
     };
 
-    console.log(searchquery);
+    console.log('Finished');
 
 });
 });

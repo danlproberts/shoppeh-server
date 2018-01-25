@@ -5,26 +5,36 @@ Created on Fri Dec  1 16:31:29 2017
 @author: daniel.roberts
 """
 
-#import jw_search as jw
-#import hm_search as hm
+import jw_search as jw
+import hm_search as hm
 import sys, json
 
+#Read data from stdin
 def read_in():
-
     lines = sys.stdin.readlines()
-
-    return lines
+    # Since our input would only be having one line, parse our JSON data from that
+    return lines[0]
 
 def main():
-
+    #get our data as an array from read_in()
     lines = read_in()
 
-    print (lines)
+    with open('test2.txt', 'w') as filelog:
 
-    return lines
+        filelog.write(str(lines))
 
     '''
-    query = request.args.get('query')
+
+    # Sum  of all the items in the providen array
+    total_sum_inArray = 0
+    for item in lines:
+        total_sum_inArray += item
+
+    #return the sum to the output stream
+    print (total_sum_inArray)
+
+    '''
+    query = str(lines)
 
     if query == "":
 
@@ -54,7 +64,7 @@ def main():
 
             data = result
 
-    return jsonify(data)'''
+    sys.stdout.write(str(data))
 
 if __name__ == '__main__':
     main()
