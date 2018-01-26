@@ -13,7 +13,7 @@ from datetime import datetime
 def query(ipt):
 
     ipt = str(ipt)[1:-2]
-    ipt.replace(" ", "+")
+    ipt = ipt.replace(" ", "+")
     return str(ipt)
 
 def presentable(txt):
@@ -54,6 +54,11 @@ def searcher(search_term):
                 filelog.write(str(type(search_term)))
                 filelog.write(query(search_term))
                 filelog.write(url)
+
+                for j in query(search_term):
+
+                    filelog.write('\n' + str(ord(j)))
+
                 filelog.close()
 
             html_count = soup.find('div', class_="search-results-count").get_text()

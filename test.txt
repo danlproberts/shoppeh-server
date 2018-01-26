@@ -1,1 +1,11 @@
-<class 'str'>blue jeanshttp://www.jackwills.com/search?q=blue jeans&sz=48&start=0&pmin=0&pmax=1000
+<class 'str'>blue+jeanshttp://www.jackwills.com/search?q=blue+jeans&sz=48&start=0&pmin=0&pmax=1000
+98
+108
+117
+101
+43
+106
+101
+97
+110
+115

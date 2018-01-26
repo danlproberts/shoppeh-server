@@ -38,15 +38,14 @@ PythonShell.run(retailscraper, options, function (err, results) {
 });
 });
 */
+pyshell.send(JSON.stringify(searchquery));
 
- pyshell.stdout.on('result', function (result) {
+ pyshell.on('data', function (data) {
 
-    console.log(uint8arrayToString(result));
-    //response.json();
+    console.log(data);
+    response.json(data);
 
   });
-
-pyshell.send(JSON.stringify(searchquery));
 
   pyshell.end(function (err) {
     if (err){
