@@ -43,14 +43,14 @@ def main():
     else:
 
         jw_result = jw.searcher(query)
-        #hm_result = hm.searcher(query)
+        hm_result = hm.searcher(query)
 
         jw_count = jw_result.pop(-1)
-        #hm_count = hm_result.pop(-1)
+        hm_count = hm_result.pop(-1)
 
-        count = int(jw_count["searchcount"])# + int(hm_count["searchcount"])
+        count = int(jw_count["searchcount"]) + int(hm_count["searchcount"])
 
-        result = jw_result #+ hm_result
+        result = jw_result + hm_result
 
         print (count)
 
