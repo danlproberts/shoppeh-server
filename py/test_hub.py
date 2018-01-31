@@ -11,18 +11,27 @@ def main():
     lines = read_in()
 
     query = str(lines)
+    data = 'placeholder'
+
+    with open('../test.txt', 'w') as filelog:
+        filelog.write(query)
+        filelog.write(str(type(query)))
 
     if query == "":
 
-        data = {'name': "Please enter a search term!"}
+        data = "Please enter a search term!"
 
     elif query == "Marco":
 
-        data = {'result': 'Polo'}
+        data = 'Polo'
 
     else:
 
-        data = {'result': 'Blah Blah Blah!'}
+        data = 'Blah Blah Blah!'
+
+    with open('../test.txt', 'a') as filelog:
+        filelog.write(data)
+        filelog.write(str(type(data)))
 
     sys.stdout.write(json.dumps(data))
     print (json.dumps(data))

@@ -11,7 +11,8 @@ var PythonShell = require('python-shell');
 
 //Setting up main python script
 var retailscraper = 'py/test_hub.py'
-var pyshell = new PythonShell(retailscraper, { mode: 'json ', pythonPath : 'C:/Users/daniel.roberts/AppData/Local/Continuum/anaconda3/python.exe'});
+var options = { mode: 'json', pythonPath : 'C:/Users/daniel.roberts/AppData/Local/Continuum/anaconda3/python.exe'}
+var pyshell = new PythonShell(retailscraper, options);
 
 var uint8arrayToString = function(data){
     return String.fromCharCode.apply(null, data);
@@ -22,7 +23,7 @@ app.get('/', (request, response) => response.send('Welcome to the Shoppeh API'))
 
 //Router Setup
 app.get('/search_api', (request, response) => {
-
+  console.log('Processing...')
 /*
 //Prefixing Path
 router.get('/', (request, response) => {
@@ -31,28 +32,17 @@ router.get('/', (request, response) => {
   var parameters = urlParts.query;
   var searchquery = parameters.query;
 
-/*
+  pyshell.send(JSON.stringify(searchquery));
 
-});
-*/
-pyshell.send(JSON.stringify(searchquery));
+  pyshell.on('message', function (message) {
 
- //pyshell.receive('data', function (data) {
+    response.send(message);
+    console.log(message);
 
-    console.log(searchquery);
-//    response.send(data);
+  });
 
-  //});
-/*
-  pyshell.end(function (err) {
-    if (err){
-        throw err;
-    };
+  console.log('Finished!')
 
-    console.log('Finished');
-
-});
-*/
 });
 
 //Start port listen
