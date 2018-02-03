@@ -8,20 +8,17 @@ def read_in():
 
 def main():
     #get our data as an array from read_in()
-    lines = read_in()
+    #lines = read_in()
 
-    query = str(lines)
+    query = str(sys.argv[1])
     data = 'placeholder'
 
-    with open('../test.txt', 'w') as filelog:
-        filelog.write(query)
-        filelog.write(str(type(query)))
 
     if query == "":
 
         data = "Please enter a search term!"
 
-    elif query == "Marco":
+    elif query == "marco":
 
         data = 'Polo'
 
@@ -29,12 +26,14 @@ def main():
 
         data = 'Blah Blah Blah!'
 
-    with open('../test.txt', 'a') as filelog:
+    with open('test.txt', 'a') as filelog:
         filelog.write(data)
-        filelog.write(str(type(data)))
+        filelog.write('\n' + str(sys.argv))
 
-    sys.stdout.write(json.dumps(data))
     print (json.dumps(data))
+
+with open('test.txt', 'w') as filelog:
+    filelog.write(__name__)
 
 if __name__ == '__main__':
     main()

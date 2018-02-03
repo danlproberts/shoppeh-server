@@ -10,38 +10,46 @@ const url = require('url');
 var PythonShell = require('python-shell');
 
 //Setting up main python script
-var retailscraper = 'py/test_hub.py'
-var options = { mode: 'json', pythonPath : 'C:/Users/daniel.roberts/AppData/Local/Continuum/anaconda3/python.exe'}
-var pyshell = new PythonShell(retailscraper, options);
-
-var uint8arrayToString = function(data){
-    return String.fromCharCode.apply(null, data);
-};
+var retailscraper = 'retail_hub.py'
 
 //Top-level Path
 app.get('/', (request, response) => response.send('Welcome to the Shoppeh API'));
 
 //Router Setup
-app.get('/search_api', (request, response) => {
-  console.log('Processing...')
-/*
+app.use('/search_api', router);
+
 //Prefixing Path
 router.get('/', (request, response) => {
-*/
+
+  var ip = request.header('x-forwarded-for') || request.connection.remoteAddress;
+  if (ip === "::1") {
+     ip = 'localhost';
+   }
+
+  console.log('Processing request from %j...', ip)
+
   var urlParts = url.parse(request.url, true);
   var parameters = urlParts.query;
   var searchquery = parameters.query;
 
-  pyshell.send(JSON.stringify(searchquery));
+  var options = { mode: 'text',
+  pythonPath : 'C:/Users/Daniel/Anaconda3/python.exe',
+  scriptPath: 'py',
+  args: [searchquery]}
 
-  pyshell.on('message', function (message) {
+  console.log('Search Term: %j', searchquery);
 
-    response.send(message);
-    console.log(message);
+  //pyshell.send(searchquery);
 
-  });
+  PythonShell.run(retailscraper, options, function (err, results) {
+  if (err) throw err;
+  // results is an array consisting of messages collected during execution
+  response.writeHead(200, {"Content-Type": "application/json"})
+  response.write(results);
+  response.end()
+});
 
-  console.log('Finished!')
+  console.log('Request Sent')
 
 });
 

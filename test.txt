@@ -1,0 +1,4 @@
+<class 'str'>hirhttp://www.jackwills.com/search?q=hir&sz=48&start=0&pmin=0&pmax=1000
+104
+105
+114
