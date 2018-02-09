@@ -12,8 +12,7 @@ from datetime import datetime
 
 def query(ipt):
 
-    ipt = str(ipt)[1:-2]
-    ipt = ipt.replace(" ", "+")
+    ipt = str(ipt).replace(" ", "+")
     return str(ipt)
 
 def presentable(txt):
@@ -87,7 +86,7 @@ def searcher(search_term):
 
         result_list.append({"searchcount": count})
 
-        print ("HM - " + count)
+        #print ("HM - " + count)
 
 
 

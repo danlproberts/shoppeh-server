@@ -30,8 +30,6 @@ def main():
 
         result = jw_result + hm_result
 
-        print (count)
-
         result.append(str(count))
 
         if result == []:

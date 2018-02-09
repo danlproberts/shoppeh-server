@@ -33,7 +33,7 @@ router.get('/', (request, response) => {
   var searchquery = parameters.query;
 
   var options = { mode: 'text',
-  pythonPath : 'C:/Users/Daniel/Anaconda3/python.exe',
+  pythonPath : 'C:/Users/daniel.roberts/AppData/Local/Continuum/anaconda3/python.exe', //C:/Users/Daniel/Anaconda3/python.exe
   scriptPath: 'py',
   args: [searchquery]}
 
@@ -44,9 +44,11 @@ router.get('/', (request, response) => {
   PythonShell.run(retailscraper, options, function (err, results) {
   if (err) throw err;
   // results is an array consisting of messages collected during execution
-  response.writeHead(200, {"Content-Type": "application/json"})
-  response.write(results);
-  response.end()
+  console.log(response.statusCode.toString())
+  response.writeHead(response.statusCode.toString(), {"Content-Type": "application/json"});
+  response.write(results.toString());
+  console.log('Results Recieved')
+  response.end();
 });
 
   console.log('Request Sent')
