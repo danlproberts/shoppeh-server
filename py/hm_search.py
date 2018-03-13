@@ -53,7 +53,14 @@ def searcher(search_term):
                 filelog.write(str(url))
                 filelog.close()
 
-            count = soup.find('span', class_="total-count").get_text()
+            try:
+
+                count = soup.find('span', class_="total-count").get_text()
+
+            except AttributeError:
+
+                return [{'name': 'No Results!', 'des': 'H&M returned no results.'}, {'searchcount': '0'}]
+                break
 
             #html_count = soup.find('div', class_="search-results-count").h1.get_text()
 

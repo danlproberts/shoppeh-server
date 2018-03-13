@@ -23,8 +23,21 @@ def main():
         jw_result = jw.searcher(query)
         hm_result = hm.searcher(query)
 
-        jw_count = jw_result.pop(-1)
-        hm_count = hm_result.pop(-1)
+        try:
+
+            jw_count = jw_result.pop(-1)
+
+        except:
+            jw_count = {"searchcount": 0}
+            pass
+
+        try:
+
+            hm_count = hm_result.pop(-1)
+
+        except:
+            hm_count = {"searchcount": 0}
+            pass
 
         count = int(jw_count["searchcount"]) + int(hm_count["searchcount"])
 

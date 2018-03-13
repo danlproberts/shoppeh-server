@@ -28,7 +28,7 @@ def searcher(search_term):
 
     if search_term == "":
 
-        return "Sorry!"
+        return "Sorry! Please put in a search term."
 
     else:
 
@@ -60,7 +60,14 @@ def searcher(search_term):
 
                 filelog.close()
 
-            html_count = soup.find('div', class_="search-results-count").get_text()
+            try:
+
+                html_count = soup.find('div', class_="search-results-count").get_text()
+
+            except AttributeError:
+
+                return [{'name': 'No Results!', 'des': 'Jack Wills returned no results.'}, {'searchcount': '0'}]
+                break
 
             #html_count = soup.find('div', class_="search-results-count").h1.get_text()
 
